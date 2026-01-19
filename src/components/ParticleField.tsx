@@ -77,15 +77,15 @@ export default function ParticleField() {
           x: Math.random() * width,
           y: Math.random() * height,
           z: Math.random() * 2 + 1,
-          vx: isHorizontal ? (Math.random() * 2 + 1) * (Math.random() > 0.5 ? 1 : -1) : 0,
-          vy: isHorizontal ? 0 : (Math.random() * 2 + 1) * (Math.random() > 0.5 ? 1 : -1),
+          vx: isHorizontal ? (Math.random() * 0.3 + 0.1) * (Math.random() > 0.5 ? 1 : -1) : 0,
+          vy: isHorizontal ? 0 : (Math.random() * 0.3 + 0.1) * (Math.random() > 0.5 ? 1 : -1),
           size: Math.random() * 1.5 + 0.5,
           color: Math.random() > 0.5 ? colors.cyan[0] : colors.magenta[0],
           brightness: Math.random() * 0.5 + 0.5,
           type: "line",
           length: Math.random() * 80 + 20,
           angle: isHorizontal ? 0 : Math.PI / 2,
-          speed: Math.random() * 3 + 2,
+          speed: Math.random() * 0.3 + 0.2,
           pulsePhase: Math.random() * Math.PI * 2,
         });
       }
