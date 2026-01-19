@@ -1,0 +1,302 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #00ffff;
+  --cyan: #00ffff;
+  --magenta: #ff00ff;
+  --pink: #ff0080;
+  --green: #00ff00;
+  --yellow: #ffff00;
+  --white: #ffffff;
+  --gray: #888888;
+  --dark-gray: #1a1a2e;
+  --glass-bg: rgba(0, 255, 255, 0.05);
+  --glass-border: rgba(0, 255, 255, 0.2);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-cyan: var(--cyan);
+  --color-magenta: var(--magenta);
+  --color-pink: var(--pink);
+  --color-green: var(--green);
+  --color-yellow: var(--yellow);
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--cyan);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--magenta);
+}
+
+/* Selection */
+::selection {
+  background: var(--cyan);
+  color: var(--background);
+}
+
+/* Scanlines Overlay */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.1) 0px,
+    rgba(0, 0, 0, 0.1) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  animation: scanlines 0.1s linear infinite;
+}
+
+@keyframes scanlines {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 4px; }
+}
+
+/* CRT Flicker */
+.crt-flicker {
+  animation: crt-flicker 0.15s infinite;
+}
+
+@keyframes crt-flicker {
+  0% { opacity: 0.97; }
+  50% { opacity: 1; }
+  100% { opacity: 0.98; }
+}
+
+/* Glitch Effect */
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.glitch:hover::before {
+  animation: glitch-1 0.3s infinite;
+  color: var(--cyan);
+  z-index: -1;
+  opacity: 0.8;
+}
+
+.glitch:hover::after {
+  animation: glitch-2 0.3s infinite;
+  color: var(--magenta);
+  z-index: -2;
+  opacity: 0.8;
+}
+
+@keyframes glitch-1 {
+  0% { clip-path: inset(20% 0 60% 0); transform: translate(-2px, 2px); }
+  20% { clip-path: inset(60% 0 20% 0); transform: translate(2px, -2px); }
+  40% { clip-path: inset(40% 0 40% 0); transform: translate(-2px, 0); }
+  60% { clip-path: inset(80% 0 10% 0); transform: translate(2px, 2px); }
+  80% { clip-path: inset(10% 0 80% 0); transform: translate(-2px, -2px); }
+  100% { clip-path: inset(20% 0 60% 0); transform: translate(2px, 0); }
+}
+
+@keyframes glitch-2 {
+  0% { clip-path: inset(60% 0 20% 0); transform: translate(2px, -2px); }
+  20% { clip-path: inset(20% 0 60% 0); transform: translate(-2px, 2px); }
+  40% { clip-path: inset(80% 0 10% 0); transform: translate(2px, 0); }
+  60% { clip-path: inset(40% 0 40% 0); transform: translate(-2px, -2px); }
+  80% { clip-path: inset(10% 0 80% 0); transform: translate(2px, 2px); }
+  100% { clip-path: inset(60% 0 20% 0); transform: translate(-2px, 0); }
+}
+
+/* Glassmorphism */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+}
+
+.glass-strong {
+  background: rgba(0, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 8px;
+}
+
+/* Neon Glow */
+.neon-cyan {
+  text-shadow: 
+    0 0 5px var(--cyan),
+    0 0 10px var(--cyan),
+    0 0 20px var(--cyan),
+    0 0 40px var(--cyan);
+}
+
+.neon-magenta {
+  text-shadow: 
+    0 0 5px var(--magenta),
+    0 0 10px var(--magenta),
+    0 0 20px var(--magenta),
+    0 0 40px var(--magenta);
+}
+
+.neon-pink {
+  text-shadow: 
+    0 0 5px var(--pink),
+    0 0 10px var(--pink),
+    0 0 20px var(--pink);
+}
+
+/* Typing Cursor */
+.cursor {
+  display: inline-block;
+  width: 10px;
+  height: 1.2em;
+  background: var(--cyan);
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Matrix Rain Canvas */
+.matrix-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.15;
+}
+
+/* Vignette */
+.vignette {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 60%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+}
+
+/* RGB Split on hover for interactive elements */
+.rgb-split {
+  transition: all 0.1s ease;
+}
+
+.rgb-split:hover {
+  text-shadow: 
+    -2px 0 var(--cyan),
+    2px 0 var(--magenta);
+}
+
+/* Pulse animation */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Float animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Terminal input styling */
+.terminal-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--cyan);
+  font-family: inherit;
+  font-size: inherit;
+  width: 100%;
+  caret-color: var(--cyan);
+}
+
+.terminal-input::placeholder {
+  color: var(--gray);
+  opacity: 0.5;
+}
+
+/* Command output animation */
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* Confetti keyframes */
+@keyframes confetti-fall {
+  0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: 0;
+  animation: confetti-fall 3s ease-out forwards;
+  z-index: 9999;
+}
